@@ -1,6 +1,7 @@
 Java9 and Docker - minimalist future is here
 ==============================================
 
+Quick look at how to dish out those size zero docker images that packages your runtime app binaries
 
 ### Steps to install java9 on ubuntu (included a provision script, invoked when vagrant launches)
 
