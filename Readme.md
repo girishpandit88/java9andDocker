@@ -39,13 +39,12 @@ Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
 
 ### compile HelloWorld java9 style
 ```
-> javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java`
+> javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java
 ```
 
 ### run HelloWorld::main
 ```
 > java --module-path mods -m com.greetings/com.greetings.HelloWorld
-export MODS=/usr/lib/jvm/java-9-oracle/jmods/
 Hello World
 ```
 
