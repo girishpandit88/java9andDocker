@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Java9anddocker by girishpandit88</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Java9anddocker</h1>
+      <h2 class="project-tagline">demo of how to run minimalist images of your app</h2>
+      <a href="https://github.com/girishpandit88/java9andDocker" class="btn">View on GitHub</a>
+      <a href="https://github.com/girishpandit88/java9andDocker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/girishpandit88/java9andDocker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="java9-and-docker---minimalist-future-is-here" class="anchor" href="#java9-and-docker---minimalist-future-is-here" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Java9 and Docker - minimalist future is here</h1>
+
+<h3>
+<a id="steps-to-install-java9-on-ubuntu-included-a-provision-script-invoked-when-vagrant-launches" class="anchor" href="#steps-to-install-java9-on-ubuntu-included-a-provision-script-invoked-when-vagrant-launches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Steps to install java9 on ubuntu (included a provision script, invoked when vagrant launches)</h3>
+
+<pre><code>sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get install oracle-java9-installer
+sudo apt-get install oracle-java9-set-default
+export JAVA_HOME=/usr/lib/jvm/java-9-oracle
+export MODS=$JAVA_HOME/jmods/
+</code></pre>
+
+<h3>
+<a id="confirm-java-version" class="anchor" href="#confirm-java-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>confirm java version</h3>
+
+<pre><code>&gt; java -version
+java version "9-ea"
+Java(TM) SE Runtime Environment (build 9-ea+140)
+Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
+</code></pre>
+
+<h3>
+<a id="now-cd-to-your-working-directory" class="anchor" href="#now-cd-to-your-working-directory" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>now cd to your working directory</h3>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> <span class="pl-c1">cd</span> /vagrant/
+<span class="pl-k">&gt;</span> tree
+├── Dockerfile
+├── Readme.md
+├── src
+│   └── com.greetings
+│       ├── com
+│       │   └── greetings
+│       │       └── HelloWorld.java
+│       └── module-info.java
+└── Vagrantfile</pre></div>
+
+<h3>
+<a id="compile-helloworld-java9-style" class="anchor" href="#compile-helloworld-java9-style" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>compile HelloWorld java9 style</h3>
+
+<pre><code>&gt; javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java`
+</code></pre>
+
+<h3>
+<a id="run-helloworldmain" class="anchor" href="#run-helloworldmain" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>run HelloWorld::main</h3>
+
+<pre><code>&gt; java --module-path mods -m com.greetings/com.greetings.HelloWorld
+export MODS=/usr/lib/jvm/java-9-oracle/jmods/
+Hello World
+</code></pre>
+
+<h3>
+<a id="build-your-runtime-image-using-the-jlink-command" class="anchor" href="#build-your-runtime-image-using-the-jlink-command" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>build your runtime image using the jlink command</h3>
+
+<pre><code>&gt; jlink --module-path mlib:$MODS --add-modules com.greetings --output image
+
+&gt; tree image -L 2
+image
+├── bin
+│   ├── com.greetings
+│   ├── java
+│   └── keytool
+├── conf
+│   ├── net.properties
+│   └── security
+├── lib
+│   ├── amd64
+│   ├── jexec
+│   ├── modules
+│   ├── security
+│   └── tzdb.dat
+└── release
+
+&gt;./image/bin/com.greetings 
+Hello World
+</code></pre>
+
+<h3>
+<a id="build-the-dockerfile" class="anchor" href="#build-the-dockerfile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>build the Dockerfile</h3>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> docker build <span class="pl-c1">.</span> -t greetings</pre></div>
+
+<h3>
+<a id="run-the-built-docker-image" class="anchor" href="#run-the-built-docker-image" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>run the built docker image</h3>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> docker run greetings
+Hello World</pre></div>
+
+<h3>
+<a id="size-of-docker-images" class="anchor" href="#size-of-docker-images" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>size of docker images</h3>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> docker images 
+greetings   latest    31f997624827  34 minutes ago      169.7 MB
+<span class="pl-k">&lt;</span>none<span class="pl-k">&gt;</span>      <span class="pl-k">&lt;</span>none<span class="pl-k">&gt;</span>    fa96f037e908  36 minutes ago      169.7 MB
+ubuntu      latest    e4415b714b62  5 days ago          128.1 MB</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/girishpandit88/java9andDocker">Java9anddocker</a> is maintained by <a href="https://github.com/girishpandit88">girishpandit88</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
