@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Java9anddocker</h1>
-      <h2 class="project-tagline">demo of how to run minimalist images of your app</h2>
+      <h2 class="project-tagline">demo of how to run minimalist docker images of your app</h2>
       <a href="https://github.com/girishpandit88/java9andDocker" class="btn">View on GitHub</a>
       <a href="https://github.com/girishpandit88/java9andDocker/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/girishpandit88/java9andDocker/tarball/master" class="btn">Download .tar.gz</a>
@@ -21,6 +21,8 @@
     <section class="main-content">
       <h1>
 <a id="java9-and-docker---minimalist-future-is-here" class="anchor" href="#java9-and-docker---minimalist-future-is-here" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Java9 and Docker - minimalist future is here</h1>
+
+<p>Quick look at how to dish out those size zero docker images that packages your runtime app binaries</p>
 
 <h3>
 <a id="steps-to-install-java9-on-ubuntu-included-a-provision-script-invoked-when-vagrant-launches" class="anchor" href="#steps-to-install-java9-on-ubuntu-included-a-provision-script-invoked-when-vagrant-launches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Steps to install java9 on ubuntu (included a provision script, invoked when vagrant launches)</h3>
@@ -59,14 +61,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
 <h3>
 <a id="compile-helloworld-java9-style" class="anchor" href="#compile-helloworld-java9-style" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>compile HelloWorld java9 style</h3>
 
-<pre><code>&gt; javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java`
+<pre><code>&gt; javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java
 </code></pre>
 
 <h3>
 <a id="run-helloworldmain" class="anchor" href="#run-helloworldmain" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>run HelloWorld::main</h3>
 
 <pre><code>&gt; java --module-path mods -m com.greetings/com.greetings.HelloWorld
-export MODS=/usr/lib/jvm/java-9-oracle/jmods/
 Hello World
 </code></pre>
 
