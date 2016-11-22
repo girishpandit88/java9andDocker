@@ -84,3 +84,9 @@ Hello World
 Hello World
 ```
 
+### size of docker images
+```bash
+> docker images 
+greetings   latest    31f997624827  34 minutes ago      169.7 MB
+<none>      <none>    fa96f037e908  36 minutes ago      169.7 MB
+ubuntu      latest    e4415b714b62  5 days ago          128.1 MB
