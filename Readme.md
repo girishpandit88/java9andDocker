@@ -2,7 +2,7 @@ Java9 and Docker - minimalist future is here
 ==============================================
 
 
-# Steps to install java9 on ubuntu (included a provision script, invoked when vagrant launches)
+### Steps to install java9 on ubuntu (included a provision script, invoked when vagrant launches)
 
 ```
 sudo add-apt-repository ppa:webupd8team/java
@@ -13,7 +13,7 @@ export MODS=$JAVA_HOME/jmods/
 ```
 
 
-# confirm java version
+### confirm java version
 ```
 > java -version
 java version "9-ea"
@@ -21,7 +21,7 @@ Java(TM) SE Runtime Environment (build 9-ea+140)
 Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
 ```
 
-# now cd to your working directory
+### now cd to your working directory
 ```bash
 > cd /vagrant/
 > tree
@@ -36,19 +36,19 @@ Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
 └── Vagrantfile
 ```
 
-# compile HelloWorld java9 style
+### compile HelloWorld java9 style
 ```
 > javac -d mods/com.greetings src/com.greetings/module-info.java src/com.greetings/com/greetings/HelloWorld.java`
 ```
 
-# run HelloWorld::main
+### run HelloWorld::main
 ```
 > java --module-path mods -m com.greetings/com.greetings.HelloWorld
 export MODS=/usr/lib/jvm/java-9-oracle/jmods/
 Hello World
 ```
 
-# build your runtime image using the jlink command
+### build your runtime image using the jlink command
 ```
 > jlink --module-path mlib:$MODS --add-modules com.greetings --output image
 
@@ -73,12 +73,12 @@ image
 Hello World
 ```
 
-# build the Dockerfile
+### build the Dockerfile
 ```bash
 > docker build . -t greetings
 ```
 
-# run the built docker image
+### run the built docker image
 ```bash
 > docker run greetings
 Hello World
