@@ -48,6 +48,12 @@ Java HotSpot(TM) 64-Bit Server VM (build 9-ea+140, mixed mode)
 Hello World
 ```
 
+### create jar of HelloWorld
+```
+mkdir -p mlib
+jar --create --file=mlib/com.greetings.jar --main-class=com.greetings.HelloWorld -C mods/com.greetings .
+```
+
 ### build your runtime image using the jlink command
 ```
 > jlink --module-path mlib:$MODS --add-modules com.greetings --output image
