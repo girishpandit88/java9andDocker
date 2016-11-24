@@ -72,6 +72,13 @@ Hello World
 </code></pre>
 
 <h3>
+<a id="create-jar-of-helloworld" class="anchor" href="#create-jar-of-helloworld" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>create jar of HelloWorld</h3>
+
+<pre><code>mkdir -p mlib
+jar --create --file=mlib/com.greetings.jar --main-class=com.greetings.HelloWorld -C mods/com.greetings .
+</code></pre>
+
+<h3>
 <a id="build-your-runtime-image-using-the-jlink-command" class="anchor" href="#build-your-runtime-image-using-the-jlink-command" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>build your runtime image using the jlink command</h3>
 
 <pre><code>&gt; jlink --module-path mlib:$MODS --add-modules com.greetings --output image
